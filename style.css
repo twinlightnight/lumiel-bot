@@ -1,0 +1,62 @@
+
+body {
+  background: linear-gradient(to bottom, #0b0c2a, #1f203f);
+  color: #fff6f0;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 600px;
+  margin: 5vh auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #ffeebb;
+}
+#chat-window {
+  height: 300px;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+.message {
+  margin-bottom: 1rem;
+}
+.user {
+  text-align: right;
+  color: #cfc;
+}
+.bot {
+  text-align: left;
+  color: #ffd;
+}
+#chat-form {
+  display: flex;
+  gap: 0.5rem;
+}
+#user-input {
+  flex-grow: 1;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+}
+button {
+  background-color: #6655aa;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #8877cc;
+}
