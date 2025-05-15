@@ -62,7 +62,8 @@ body {
 }
 
 .message {
-  line-height: 2;
+  line-height: 2.4;
+  margin-bottom: 1.8rem;
 
   margin-bottom: 1.2rem;
   line-height: 1.6;
