@@ -22,26 +22,35 @@ chatForm.addEventListener("submit", async (e) => {
   const data = await response.json();
   const reply = data.reply || "申し訳ありません、今はうまく応答できません。";
 
-  displaySentencesSequentially("ルミエル", reply, "bot");
+  displaySentencesTyping("ルミエル", reply, "bot");
 });
 
-function appendMessage(name, text, cls) {
+function appendMessage(name, text, cls, showLabel = true) {
   const msgDiv = document.createElement("div");
   msgDiv.className = `message ${cls}`;
-  msgDiv.innerHTML = `<strong>${name}:</strong> ${text}`;
+  msgDiv.innerHTML = showLabel ? `<strong>${name}:</strong> ` : "";
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+  return msgDiv;
 }
 
-function displaySentencesSequentially(name, text, cls) {
-  const sentences = text.split(/(?<=[。！？\!\?])/); // 句点や感嘆符で分割
-  let delay = 0;
+function displaySentencesTyping(name, text, cls) {
+  const sentences = text.split(/(?<=[。！？\!\?])/).filter(s => s.trim() !== "");
+  const firstDiv = appendMessage(name, "", cls, true);
 
   sentences.forEach((sentence, index) => {
-    if (sentence.trim() === "") return;
     setTimeout(() => {
-      appendMessage(name, sentence.trim(), cls);
-    }, delay);
-    delay += 1000; // 1秒ごとに表示
+      typeText(firstDiv, sentence.trim() + " ");
+    }, 2000 + index * 5000); // 最初は2秒後、以降5秒ごとに
   });
+}
+
+function typeText(element, text) {
+  let i = 0;
+  const interval = setInterval(() => {
+    element.innerHTML += text.charAt(i);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    i++;
+    if (i >= text.length) clearInterval(interval);
+  }, 60);
 }
