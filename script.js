@@ -8,7 +8,13 @@ chatForm.addEventListener("submit", async (e) => {
   const message = userInput.value.trim();
   if (!message) return;
 
-  appendMessage("あなた", message, "user");
+  // ユーザーの発言をしっかり個別表示
+  const userDiv = document.createElement("div");
+  userDiv.className = "message user";
+  userDiv.innerHTML = `<strong>あなた:</strong> ${message}`;
+  chatWindow.appendChild(userDiv);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+
   userInput.value = "";
 
   const response = await fetch("/api/chat", {
@@ -28,7 +34,7 @@ chatForm.addEventListener("submit", async (e) => {
 function appendMessage(name, text, cls, showLabel = true) {
   const msgDiv = document.createElement("div");
   msgDiv.className = `message ${cls}`;
-  msgDiv.innerHTML = showLabel ? `<strong>${name}:</strong> ` : "";
+  msgDiv.innerHTML = showLabel ? `<strong>${name}:</strong><br>` : "";
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
   return msgDiv;
@@ -41,7 +47,7 @@ function displaySentencesTyping(name, text, cls) {
   sentences.forEach((sentence, index) => {
     setTimeout(() => {
       typeText(firstDiv, sentence.trim() + "\n");
-    }, 2000 + index * 5000); // 2秒後→1文目、5秒ごとに次の文
+    }, 2000 + index * 5000);
   });
 }
 
