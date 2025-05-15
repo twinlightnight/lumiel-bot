@@ -8,10 +8,12 @@ chatForm.addEventListener("submit", async (e) => {
   const message = userInput.value.trim();
   if (!message) return;
 
-  // ユーザーの発言をしっかり個別表示
   const userDiv = document.createElement("div");
   userDiv.className = "message user";
-  userDiv.innerHTML = `<strong>あなた:</strong> ${message}`;
+  const userLabel = document.createElement("strong");
+  userLabel.textContent = "あなた:";
+  userDiv.appendChild(userLabel);
+  userDiv.appendChild(document.createTextNode(" " + message));
   chatWindow.appendChild(userDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
