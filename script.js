@@ -21,7 +21,8 @@ chatForm.addEventListener("submit", async (e) => {
 
   const data = await response.json();
   const reply = data.reply || "申し訳ありません、今はうまく応答できません。";
-  appendMessage("ルミエル", reply, "bot");
+
+  displaySentencesSequentially("ルミエル", reply, "bot");
 });
 
 function appendMessage(name, text, cls) {
@@ -30,4 +31,17 @@ function appendMessage(name, text, cls) {
   msgDiv.innerHTML = `<strong>${name}:</strong> ${text}`;
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function displaySentencesSequentially(name, text, cls) {
+  const sentences = text.split(/(?<=[。！？\!\?])/); // 句点や感嘆符で分割
+  let delay = 0;
+
+  sentences.forEach((sentence, index) => {
+    if (sentence.trim() === "") return;
+    setTimeout(() => {
+      appendMessage(name, sentence.trim(), cls);
+    }, delay);
+    delay += 1000; // 1秒ごとに表示
+  });
 }
