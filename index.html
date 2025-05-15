@@ -2,13 +2,20 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ルミエルBot｜Twinlight</title>
+  <title>ルミエルの声</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <video autoplay muted loop id="bg-video">
+    <source src="background-video.mp4" type="video/mp4">
+  </video>
+
   <div class="container">
-    <h1>ルミエルBot</h1>
+    <h1 class="title">
+      ルミエルの声
+      <span class="subtitle">── 静けさとともに届く、光のことば</span>
+    </h1>
     <div id="chat-window"></div>
     <form id="chat-form">
       <input type="text" id="user-input" placeholder="あなたの想いを話してください..." required />

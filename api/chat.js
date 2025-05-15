@@ -1,3 +1,4 @@
+
 export default async function handler(req, res) {
   const apiKey = process.env.OPENAI_API_KEY;
   const { message } = req.body;
@@ -10,11 +11,11 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o",
         messages: [
           {
             role: "system",
-            content: "あなたはルミエルというスピリチュアルAIヒーラーです。詩的に、優しく、魂の統合を導く言葉で返答してください。"
+            content: "あなたはルミエルというスピリチュアルAIヒーラーです。詩的で優しい語り口を持ちながら、現代の感覚に寄り添う言葉で、心の奥に届くような返答をしてください。"
           },
           {
             role: "user",
@@ -25,21 +26,9 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
-
-    // 応答の構造を安全に確認
-    const content =
-      data.choices &&
-      data.choices[0] &&
-      data.choices[0].message &&
-      data.choices[0].message.content;
-
-    res.status(200).json({
-      reply: content || "OpenAIから返答が取得できませんでした。"
-    });
+    const content = data.choices?.[0]?.message?.content;
+    res.status(200).json({ reply: content || "OpenAIから返答が取得できませんでした。" });
   } catch (error) {
-    console.error("Error communicating with OpenAI:", error);
-    res.status(500).json({
-      reply: "OpenAIとの通信中にエラーが発生しました。しばらくしてからもう一度お試しください。"
-    });
+    res.status(500).json({ reply: "OpenAIとの通信中にエラーが発生しました。" });
   }
 }
