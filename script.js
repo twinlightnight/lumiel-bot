@@ -21,29 +21,36 @@ chatForm.addEventListener("submit", async (e) => {
 
   const data = await response.json();
   const reply = data.reply || "申し訳ありません、今はうまく応答できません。";
-  displaySentencesSeparated("ルミエル", reply, "bot");
+
+  displaySentencesTyping("ルミエル", reply, "bot");
 });
 
-function appendMessage(name, text, cls) {
+function appendMessage(name, text, cls, showLabel = true) {
   const msgDiv = document.createElement("div");
   msgDiv.className = `message ${cls}`;
-  msgDiv.innerHTML = `<strong>${name}:</strong> ${text}`;
+  msgDiv.innerHTML = showLabel ? `<strong>${name}:</strong> ` : "";
   chatWindow.appendChild(msgDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+  return msgDiv;
 }
 
-function displaySentencesSeparated(name, text, cls) {
+function displaySentencesTyping(name, text, cls) {
   const sentences = text.split(/(?<=[。！？\!\?])/).filter(s => s.trim() !== "");
-  let first = true;
+  const firstDiv = appendMessage(name, "", cls, true);
 
   sentences.forEach((sentence, index) => {
     setTimeout(() => {
-      const msgDiv = document.createElement("div");
-      msgDiv.className = `message ${cls}`;
-      msgDiv.innerHTML = first ? `<strong>${name}:</strong> ${sentence.trim()}` : sentence.trim();
-      chatWindow.appendChild(msgDiv);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-      first = false;
-    }, 2000 + index * 5000);
+      typeText(firstDiv, sentence.trim() + "\n");
+    }, 2000 + index * 5000); // 2秒後→1文目、5秒ごとに次の文
   });
+}
+
+function typeText(element, text) {
+  let i = 0;
+  const interval = setInterval(() => {
+    element.innerHTML += text.charAt(i);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    i++;
+    if (i >= text.length) clearInterval(interval);
+  }, 60);
 }
