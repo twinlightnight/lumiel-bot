@@ -6,6 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Yu Mincho", "Noto Serif JP", serif;
+  font-size: 14px;
   color: #fff6f0;
   background-color: #000;
   overflow-x: hidden;
@@ -27,21 +28,21 @@ body {
   max-width: 600px;
   margin: 10vh auto;
   padding: 2rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 1rem;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
 .title {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   text-align: center;
-  line-height: 2.5rem;
+  line-height: 2.2rem;
   color: #ffeebb;
 }
 
 .subtitle {
   display: block;
-  font-size: 1rem;
+  font-size: 0.95rem;
   opacity: 0.7;
   margin-top: 0.3rem;
 }
@@ -77,6 +78,13 @@ body {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-image: url("background-video.mp4");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #user-input {
@@ -112,10 +120,10 @@ button:hover {
   }
 
   .title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
